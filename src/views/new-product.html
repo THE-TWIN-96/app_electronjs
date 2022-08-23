@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Product</title>
+    <!-- Archivo Bootswatch para estilizar la página. -->
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+</head>
+<body>
+    <form class="p-4">
+        <div class="form-group mb-3">
+            <input type="text" id="name" class="form-control" placeholder="Product's Name" 
+            autofocus>
+        </div>
+        <div class="form-group mb-3">
+            <input type="text" id="price" class="form-control" placeholder="Price">
+        </div>
+        <div class="form-group mb-3">
+            <input type="text" id="description" class="form-control" placeholder="Description">
+        </div>
+        <button class="btn btn-primary btn-block">Save Product</button>
+    </form>
+
+    <script>
+        //Importar ipcRenderer, para la comunicación entre ventanas
+        const { ipcRenderer } = require('electron');
+
+        //Captura el elemento formulario.
+        const form = document.querySelector('form');
+        //Manda a form a escuchar el evento submit.
+        form.addEventListener('submit', e => {
+            //console.log(e);
+
+            //Para guardar los valores de los campos Name, Price y Description.
+            const nameProduct = document.querySelector('#name').value;
+            const priceProduct = document.querySelector('#price').value;
+            const descriptionProduct = document.querySelector('#description').value;
+
+            //Mostrar la información por consola.
+            //console.log(nameProduct, priceProduct, descriptionProduct);
+
+            //Utilizando ipcRenderer para enviar el nuevo producto a otra ventana.
+            const newProduct = {
+                name: nameProduct,
+                price: priceProduct,
+                description: descriptionProduct
+            };
+            ipcRenderer.send('product:new', newProduct);
+
+            //Cancelara el autovaciado de los campos, al hacer submit, en el formulario.
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html>
