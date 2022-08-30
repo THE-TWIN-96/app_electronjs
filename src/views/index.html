@@ -26,12 +26,37 @@
         ipcRenderer.on('new-product', (e, newProduct) => {
             //console.log(newProduct);
 
-            //
+            //Lo que se va a mostrar cada vez que se agregue un nuevo producto.
             const newProductTemplate = `
-               <div class="col-xs-4 p-2"> 
-
+               <div class="col-xl-3 p-2"> 
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h5 class="card-title">${newProduct.name}</h5>
+                        </div>
+                        <div class="card-body">
+                            ${newProduct.description}
+                            <hr/>
+                            ${newProduct.price}
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-danger btn-sm">DELETE</button>
+                        </div>
+                    </div>
                </div>
             `;
+            products.innerHTML += newProductTemplate;
+
+            //Para elimnar cada producto al presionar el botón DELETE
+            //Capturo todos los botones DELETE por el nombre de clase
+            const btns = document.querySelector('.btn btn-danger');
+            //Itero cada botón
+            btns.forEach(btn => {
+                //Cada botón escuchará el evento Click
+                btn.addEventListener('click', e => {
+                    //La ventana sabrá que botón fue clickeado
+                    e.target;
+                });
+            });
         });
     </script>
 </body>

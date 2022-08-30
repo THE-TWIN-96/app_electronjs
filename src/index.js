@@ -30,8 +30,8 @@ app.on('ready', () => {
     //Crear la ventana principal.
     mainWindow = new BrowserWindow({
         /*Propiedades de la ventana: ancho, alto, etc.*/
-        width: 1200,
-        height: 700,
+        width: 1600,
+        height: 800,
         center: true,
         minHeight: 700,
         minWidth: 1200,
@@ -69,11 +69,11 @@ app.on('ready', () => {
 function createnewProductWindow(){
     newProductWindow = new BrowserWindow({
         title: 'Add A New Product',
-        width: 1200,
-        height: 700,
+        width: 400,
+        height: 360,
         center: true,
-        minHeight: 700,
-        minWidth: 1200,
+        //minHeight: 700,
+        //minWidth: 1200,
         //Al poner estas propiedades, solucioné el error de 
         //Uncaught ReferenceError: require is not defined.
         webPreferences: {
