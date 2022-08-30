@@ -48,15 +48,21 @@
 
             //Para elimnar cada producto al presionar el botón DELETE
             //Capturo todos los botones DELETE por el nombre de clase
-            const btns = document.querySelector('.btn btn-danger');
+            const btns = document.querySelectorAll('.btn.btn-danger');
             //Itero cada botón
             btns.forEach(btn => {
                 //Cada botón escuchará el evento Click
                 btn.addEventListener('click', e => {
                     //La ventana sabrá que botón fue clickeado
-                    e.target;
+                    //Subo 3 elementos (desde el botón al div que contiene la clase col-xl-3 p-2),
+                    //para hacer la selección de toda la tarjeta y esta sea eliminada al dar click en el botón DELETE
+                    e.target.parentElement.parentElement.parentElement.remove();
                 });
             });
+        });
+
+        ipcRenderer.on('remove-all-product', (e) => {
+            products.innerHTML = '';
         });
     </script>
 </body>

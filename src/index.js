@@ -106,6 +106,7 @@ function createnewProductWindow(){
 //Escuchando el evento del archivo new-product.html por donde viene el nuevo producto
 ipcMain.on('new-product', (e, newProduct) => {
     //console.log(newProduct);
+    //Así se envía un producto.
     mainWindow.webContents.send('new-product', newProduct);
 
     //Lueo que se haa enviado el nuevo producto de la ventana new-product.html a la ventana principal, se elimina la ventana new-product.html.
@@ -129,7 +130,11 @@ const templateMenu = [
                 }
             },
             {
-                label: 'Remove All Products'
+                label: 'Remove All Products',
+                accelerator: 'Ctrl+R',
+                click(){
+                    mainWindow.webContents.send('remove-all-product');
+                }
             },
             {
                 label: 'Exit',
