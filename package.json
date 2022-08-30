@@ -10,9 +10,10 @@
   "author": "Ing. Anniel Valle Valera",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^6.1.12"
+    "electron": "^20.1.0"
   },
   "dependencies": {
-    "electron-reload": "^2.0.0-alpha.1"
+    "electron-reload": "^2.0.0-alpha.1",
+    "requirejs": "^2.3.6"
   }
 }

@@ -1,5 +1,5 @@
 //Inicializa la aplicación.
-const {app, BrowserWindow, Menu, ipcMain} = require('electron');
+const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 //URL es un paquete de Node para cargar archivos.
 const url = require('url');
 //Path es un paquete de Node para buscar archivos.
@@ -28,7 +28,22 @@ let newProductWindow;
 //Cuando la app esté lista (iniciada) haremos...
 app.on('ready', () => {
     //Crear la ventana principal.
-    mainWindow = new BrowserWindow({/*Propiedades de la ventana: ancho, alto, etc.*/});
+    mainWindow = new BrowserWindow({
+        /*Propiedades de la ventana: ancho, alto, etc.*/
+        width: 1200,
+        height: 700,
+        center: true,
+        minHeight: 700,
+        minWidth: 1200,
+        //Al poner estas propiedades, solucioné el error de 
+        //Uncaught ReferenceError: require is not defined.
+        webPreferences: {
+            contextIsolation: false,
+            nodeIntegration: true,
+            nodeIntegrationInWorker: true,
+            enableRemoteModule: true
+        }
+    });
     //Lo que irá dentro de esa ventana: 
     mainWindow.loadURL(url.format({
         //Le doy donde y que archivo cargar
@@ -53,9 +68,20 @@ app.on('ready', () => {
 //Crear la ventana de la opción New Product.
 function createnewProductWindow(){
     newProductWindow = new BrowserWindow({
-        width: 400,
-        height: 360,
-        title: 'Add A New Product'
+        title: 'Add A New Product',
+        width: 1200,
+        height: 700,
+        center: true,
+        minHeight: 700,
+        minWidth: 1200,
+        //Al poner estas propiedades, solucioné el error de 
+        //Uncaught ReferenceError: require is not defined.
+        webPreferences: {
+            contextIsolation: false,
+            nodeIntegration: true,
+            nodeIntegrationInWorker: true,
+            enableRemoteModule: true
+        }
     });
     
     newProductWindow.loadURL(url.format({
@@ -78,8 +104,12 @@ function createnewProductWindow(){
 
 
 //Escuchando el evento del archivo new-product.html por donde viene el nuevo producto
-ipcMain.on('product:new', (e, newProduct) =>{
-    console.log(newProduct);
+ipcMain.on('new-product', (e, newProduct) => {
+    //console.log(newProduct);
+    mainWindow.webContents.send('new-product', newProduct);
+
+    //Lueo que se haa enviado el nuevo producto de la ventana new-product.html a la ventana principal, se elimina la ventana new-product.html.
+    newProductWindow.close();
 });
 
 

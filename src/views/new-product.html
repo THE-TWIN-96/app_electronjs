@@ -24,7 +24,7 @@
     </form>
 
     <script>
-        //Importar ipcRenderer, para la comunicación entre ventanas
+        //Importar ipcRenderer, para la comunicación entre ventanas.
         const { ipcRenderer } = require('electron');
 
         //Captura el elemento formulario.
@@ -47,7 +47,8 @@
                 price: priceProduct,
                 description: descriptionProduct
             };
-            ipcRenderer.send('product:new', newProduct);
+
+            ipcRenderer.send('new-product', newProduct);
 
             //Cancelara el autovaciado de los campos, al hacer submit, en el formulario.
             e.preventDefault();

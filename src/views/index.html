@@ -16,10 +16,23 @@
     </div>  
     
     <script>
-        const electron = require('electron');
+        //Importar ipcRenderer, para la comunicación entre ventanas.
+        const { ipcRenderer } = require('electron');
+
         //Captura la caja de id products.
         const products = document.querySelector('#products');
 
+        //Recibir el nuevo producto de la ventana new-product.html.
+        ipcRenderer.on('new-product', (e, newProduct) => {
+            //console.log(newProduct);
+
+            //
+            const newProductTemplate = `
+               <div class="col-xs-4 p-2"> 
+
+               </div>
+            `;
+        });
     </script>
 </body>
 </html>
