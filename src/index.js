@@ -7,7 +7,7 @@ const path = require('path');
 
 
 //Para que ejecute el reload solo cuando esté en desarrollo y no en producción.
-if (process.env.NODE_ENV !== 'production'){
+if (process.env.NODE_ENV === 'production'){
     //Librería de Node para ver los cambios en tiempo real
     //sin estar cerrando y corriendo una y otras vez el proyecto.
     require('electron-reload')(__dirname, {
@@ -17,6 +17,8 @@ if (process.env.NODE_ENV !== 'production'){
         electron: path.join(__dirname, '../node_modules', '.bin', 'electron')
     })
 }
+//NOTA: esto de arriba es para poder usar las herramientas de 
+//desarrollo, cuando process.env.NODE_ENV !== 'production'. 
 
 
 //Variables para hacer las ventanas de abajo global 
@@ -158,7 +160,7 @@ if (process.platform === 'darwin'){
 }
 
 //Agregar las herramientas de desarrollo en la barra de Menú.
-if (process.env.NODE_ENV !== 'production'){
+if (process.env.NODE_ENV === 'production'){
     templateMenu.push({
         label: 'DevTools',
         submenu: [
@@ -175,5 +177,5 @@ if (process.env.NODE_ENV !== 'production'){
         ]
     });
 }
-
-
+//NOTA: esto de arriba es para mostrar las herramientas de 
+//desarrollo, cuando process.env.NODE_ENV !== 'production'. 
